@@ -1,24 +1,30 @@
 function labelledDB = recognizeFacesKnn(testDB, trainModel, k)
-    % Outputs a list of labels, one for each input image
-
-    % Project test set Images to Eigenspace
     testW = projFaces(obtainDataVects(testDB), trainModel.keigfaces, trainModel.meanFace);
-    
-    % Make predictions based on KNN
-    predFaces = findClosestKFaces(testW, trainModel.trainW, trainModel.klambda, 'mah', k); % use euc or 'mah'
-    
+    predFaces = findClosestKFaces(testW, trainModel.trainW, trainModel.klambda, 'euc', k);
     maxN = length(testDB);
     labelledDB = testDB;
-    for i=1:maxN % For each test image
+    for i=1:maxN      
         labelsCounts = struct();
-        for j=1:k
-            label = trainModel.trainDB(predFaces(j, i)).name;
-            if (isfield(labelsCounts, label))
-                labelsCounts.(label) = labelsCounts.(label) + 1;
-            else
-                labelsCounts.(label) = 1;
-            end
+        for j=1:k       
+           label = trainModel.trainDB(predFaces(j, i)).name;                
+           if (isfield(labelsCounts, label))
+               labelsCounts.(label) = labelsCounts.(label) + 1;
+           else
+               labelsCounts.(label) = 1;
+           end;           
         end
         labelledDB(i).label = findMajorityLabel(labelsCounts);
     end
+end
+
+
+
+function label = findMajorityLabel(labelsCounts)
+    labels = fieldnames(labelsCounts);
+    counts = zeros(1, length(labels));
+    for i=1:length(labels)
+        counts(i) = labelsCounts.(labels{i});
+    end
+    [m index] = max(counts);
+    label = labels{index};
 end

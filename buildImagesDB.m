@@ -1,5 +1,5 @@
-function db = buildImagesDB(dir, prefix, ext, maxN, namesFile, imgSizeX, imgSizeY)
-    db = initDB(maxN); % Init empty db
+function db = buildImagesDB(dir, prefix, ext, maxN, namesFile, sizeX, sizeY)
+    db = initDB(maxN);
     names = readImgInfo([dir namesFile]);
     for i=1:1:maxN
         imgFileName = [dir, prefix, num2str(i), '.', ext];
@@ -12,7 +12,7 @@ function db = buildImagesDB(dir, prefix, ext, maxN, namesFile, imgSizeX, imgSize
             db(i).gray = db(i).rgb;        
         end
         db(i).grayCrop = cropHead(db(i).gray);
-        db(i).grayResize = imresize(db(i).grayCrop, [imgSizeX imgSizeY]);        
+        db(i).grayResize = imresize(db(i).grayCrop, [sizeX sizeY]);
         db(i).dataVect = db(i).grayResize(:);
     end
 end
