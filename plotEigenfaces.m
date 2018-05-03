@@ -1,4 +1,4 @@
-function plotEigenfaces(eigfaces, meanFace, cols)
+function plotEigenfaces(eigfaces, meanFace, cols, imgSizeX, imgSizeY)
     plotMean = 1;
     shift = 0;
     if (nargin <= 2)
@@ -13,7 +13,7 @@ function plotEigenfaces(eigfaces, meanFace, cols)
     figure('name','Computed Eigenfaces');    
     if (plotMean == 1)
         subplot(m, cols, round(cols/2))
-        subimage(mat2gray(reshape(meanFace, 84, 64)))
+        subimage(mat2gray(reshape(meanFace, imgSizeX, imgSizeY)))
         title('Mean Face')
         axis off
         maxN = maxN-1;
@@ -21,7 +21,7 @@ function plotEigenfaces(eigfaces, meanFace, cols)
     end
     for i=1:maxN
        subplot(m, cols, shift+i)
-       subimage(mat2gray(reshape(eigfaces(:,i), 84, 64)))
+       subimage(mat2gray(reshape(eigfaces(:,i), imgSizeX, imgSizeY)))
        title(['Eigenface ', num2str(i)])
        axis off
     end

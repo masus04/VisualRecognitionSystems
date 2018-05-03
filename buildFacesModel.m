@@ -1,9 +1,9 @@
 function trainModel = buildFacesModel(trainDB, topKThresh)
     [eigfaces, lambda, meanFace] = computeEigenfaces(trainDB);    
     [keigfaces, klambda, k] = topKeigfaces(eigfaces, lambda, topKThresh);
-%     plotEigenfaces(keigfaces, meanFace);
+    % plotEigenfaces(keigfaces, meanFace, imgX, imgY);
     trainW = projFaces(obtainDataVects(trainDB), keigfaces, meanFace);
-%     plotEigenCoeffs(trainW, 5);
+    % plotEigenCoeffs(trainW, 5);
     trainModel.keigfaces = keigfaces;
     trainModel.meanFace = meanFace;
     trainModel.topKThresh = topKThresh;
