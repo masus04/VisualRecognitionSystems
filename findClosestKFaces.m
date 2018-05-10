@@ -3,8 +3,8 @@ function predFaces = findClosestKFaces(testW, trainW, klambda, distMetric, k)
         X = trainW';
         Y = testW';
         sqrtL = 1 ./ sqrt(klambda);
-        X = bsxfun(@times, X, sqrtL);
-        Y = bsxfun(@times, Y, sqrtL);
+        X = bsxfun(@times, X, sqrtL');
+        Y = bsxfun(@times, Y, sqrtL');
     else 
         X = trainW';
         Y = testW';

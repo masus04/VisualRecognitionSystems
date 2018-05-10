@@ -11,7 +11,7 @@ function labelledDB = recognizeFacesKnn(testDB, trainModel, k)
                labelsCounts.(label) = labelsCounts.(label) + 1;
            else
                labelsCounts.(label) = 1;
-           end;           
+           end           
         end
         labelledDB(i).label = findMajorityLabel(labelsCounts);
     end
@@ -25,6 +25,6 @@ function label = findMajorityLabel(labelsCounts)
     for i=1:length(labels)
         counts(i) = labelsCounts.(labels{i});
     end
-    [m index] = max(counts);
+    [~, index] = max(counts);
     label = labels{index};
 end
