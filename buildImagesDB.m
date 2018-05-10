@@ -11,7 +11,7 @@ function db = buildImagesDB(dir, prefix, ext, maxN, namesFile, sizeX, sizeY)
         else
             db(i).gray = db(i).rgb;        
         end
-        db(i).grayCrop = cropHead(db(i).gray);
+        db(i).grayCrop = db(i).gray; % cropHead(db(i).gray);
         db(i).grayResize = imresize(db(i).grayCrop, [sizeX sizeY]);
         db(i).dataVect = db(i).grayResize(:);
     end
