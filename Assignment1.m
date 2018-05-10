@@ -24,7 +24,7 @@ model95 = buildFacesModel(trainDB, 0.95);
 plotEigenfaces(model95.keigfaces(:, 1:10), model95.meanFace, 5, imgSizeX, imgSizeY);
 
 % || - 3. Recognise Faces using 1,3,5 KNN - ||
-% Also computed MEAN neighbour
+Also computed MEAN neighbour
 labelledDB = recognizeFacesKnn(testDB, model85, 1);
 plotDBImagesWithLabels(labelledDB, 'grayCrop', 5, '1NN, Accuraccy: 0.85');
 labelledDB = recognizeFacesKnn(testDB, model85, 3);
@@ -44,3 +44,7 @@ labelledDB = recognizeFacesAvg(testDB, model95, 10, 3);
 plotDBImagesWithLabels(labelledDB, 'grayCrop', 5, 'AVG, Accuraccy: 0.95');
 
 % || - 4. Recognise Faces using 1,3,5 KNN - ||
+teamDB = testDB(:,[10, 7, 8]);
+closestNeighbours = recognizeClosestFaces(teamDB, model95, 5);
+plotDBImages(closestNeighbours, 'rgb', 5, 'Closest Neighbours of Team Members');
+
