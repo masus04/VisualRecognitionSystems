@@ -44,3 +44,7 @@ labelledDB = recognizeFacesAvg(testDB, K2, 10, 3);
 plotDBImagesWithLabels(labelledDB, 'grayCrop', 5, 'AVG,  K2');
 
 % || - 4. Recognise Faces using 1,3,5 KNN - ||
+teamDB = testDB(:,[10, 20, 7, 17, 8, 18]);
+closestNeighbours = recognizeClosestFaces(teamDB, K2, 5);
+plotDBImages(closestNeighbours, 'rgb', 5, 'Closest Neighbours of Team Members');
+
